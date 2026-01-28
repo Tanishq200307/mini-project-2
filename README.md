@@ -14,14 +14,17 @@ The work is divided into:
 ## 📂 Project Structure
 
 ```text
-mini-project-1/
+mini-project-II/
 ├── data/
-│   └── insurance.txt        # Dataset used for analysis
+│   └── train_u6lujuX_CVtuZ9i.csv        # Dataset used for analysis
+│
 ├── notebooks/
-│   ├── 01_exploration.ipynb # Data exploration and visualization
-│   └── 02_modeling.ipynb    # Model building and evaluation
-├── requirements.txt         # Project dependencies
-└── README.md                # Project documentation
+│   ├── 01_exploration.ipynb             # Data exploration and visualization
+│   └── 02_modeling.ipynb                # Model building and evaluation
+│
+├── requirements.txt                     # Project dependencies
+├── .gitignore                           # Git ignore rules
+└── README.md                            # Project documentation
 
 ```
 
