@@ -159,6 +159,7 @@ The following models were evaluated:
 
 
 
-## 👤 Author
+## 👤 Authors
 **Tanishq Rawat**
+**Aristide Kanamugire**
 
