@@ -1,0 +1,164 @@
+# Loan Approval Prediction – EDA & Modeling
+
+## 📌 Project Overview
+This project analyzes a loan application dataset to understand the factors influencing **loan approval decisions** and to build predictive models for loan approval.  
+
+The work is divided into:
+1. **Exploratory Data Analysis (EDA)** – understanding data structure, distributions, missing values, and class imbalance  
+2. **Data Preprocessing** – handling missing values, scaling, and encoding  
+3. **Modeling & Evaluation** – comparing multiple classifiers with imbalance-handling techniques  
+4. **Conclusion & Best Model Selection**
+
+---
+
+## 📂 Project Structure
+
+```text
+mini-project-1/
+├── data/
+│   └── insurance.txt        # Dataset used for analysis
+├── notebooks/
+│   ├── 01_exploration.ipynb # Data exploration and visualization
+│   └── 02_modeling.ipynb    # Model building and evaluation
+├── requirements.txt         # Project dependencies
+└── README.md                # Project documentation
+
+```
+
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+## 📊 Dataset Description
+- **Dataset Size:** 614 records, 13 features  
+- **Target Variable:** `Loan_Status`
+  - `Y` → Loan Approved  
+  - `N` → Loan Rejected  
+
+### Key Features
+- Demographics: `Gender`, `Married`, `Dependents`, `Education`
+- Employment: `Self_Employed`
+- Financial: `ApplicantIncome`, `CoapplicantIncome`, `LoanAmount`
+- Loan Details: `Loan_Amount_Term`
+- Credit: `Credit_History`
+- Location: `Property_Area`
+
+---
+
+## 🔍 Exploratory Data Analysis (EDA)
+
+### 1️⃣ Data Types & Missing Values
+- Dataset contains **numerical and categorical features**
+- Missing values were found in:
+  - `Credit_History` (~8.1%)
+  - `Self_Employed` (~5.2%)
+  - `LoanAmount` (~3.6%)
+  - `Dependents`, `Loan_Amount_Term`, `Gender`, `Married`
+
+➡️ **Conclusion:** Missing values must be handled carefully to avoid bias.
+
+---
+
+### 2️⃣ Target Variable Distribution
+- **Approved (Y): ~68.7%**
+- **Rejected (N): ~31.3%**
+
+➡️ **Insight:** The dataset is **moderately imbalanced**, which justifies:
+- Using `class_weight="balanced"`
+- Applying **SMOTE** for oversampling
+
+---
+
+### 3️⃣ Key Observations from EDA
+- Loan approvals are **strongly correlated with Credit History**
+- Income and loan amounts show **right-skewed distributions**
+- Categorical variables (Education, Property Area, Employment) provide meaningful separation
+- Class imbalance could negatively affect recall for rejected loans if not addressed
+
+---
+
+## 🛠️ Data Preprocessing
+- **Numerical Features**
+  - Median imputation
+  - Standard scaling
+- **Categorical Features**
+  - Most-frequent imputation
+  - One-hot encoding
+- **Train/Test Split**
+  - 80% training, 20% testing
+  - Stratified by target variable
+
+---
+
+## 🤖 Models Trained
+The following models were evaluated:
+
+1. **Logistic Regression**
+   - With `class_weight="balanced"`
+2. **Random Forest**
+   - With `class_weight="balanced"`
+3. **Logistic Regression + SMOTE**
+4. **Random Forest + SMOTE**
+5. **Tuned Logistic Regression + SMOTE**
+   - Hyperparameter tuning using **GridSearchCV**
+   - Optimized for **F1-score**
+
+---
+
+## 📈 Model Evaluation Metrics
+- Precision
+- Recall
+- F1-score
+- ROC–AUC
+- Confusion Matrix
+- ROC Curves
+
+---
+
+## 🏆 Model Comparison Summary
+
+| Model | Precision | Recall | F1 | ROC-AUC |
+|------|----------|--------|----|--------|
+| **Logistic Regression + SMOTE** | **0.86** | **0.96** | **0.91** | 0.87 |
+| Tuned Logistic Regression + SMOTE | 0.84 | 0.99 | 0.91 | **0.87** |
+| Random Forest + SMOTE | 0.84 | 0.98 | 0.90 | 0.80 |
+| Random Forest (balanced) | 0.84 | 0.98 | 0.90 | 0.79 |
+| Logistic Regression (balanced) | 0.86 | 0.93 | 0.89 | 0.86 |
+
+---
+
+## ✅ Best Model Selection
+**Best model (based on F1-score, tie-breaker ROC-AUC):**
+
+### 🥇 Logistic Regression + SMOTE
+- **F1-score:** 0.91  
+- **Recall:** 96%  
+- **ROC-AUC:** 0.87  
+
+➡️ This model provides the **best balance between identifying approved loans and minimizing false rejections**, making it suitable for real-world loan screening systems.
+
+---
+
+## 🔑 Key Conclusions
+- **Credit history** is the most influential feature for loan approval
+- Handling **class imbalance** significantly improves model performance
+- **SMOTE + Logistic Regression** outperforms more complex models like Random Forest
+- Simpler, well-regularized models generalize better for this dataset
+- F1-score is a more appropriate metric than accuracy due to imbalance
+
+---
+
+## 🚀 Future Improvements
+- Cost-sensitive threshold tuning for business-specific risk
+- Feature importance analysis & SHAP explainability
+- Deployment as a REST API or web application
+- Model monitoring & retraining pipeline
+
+---
+
+
+
+## 👤 Author
+**Tanishq Rawat**
+
