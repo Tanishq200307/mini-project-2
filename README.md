@@ -174,6 +174,11 @@ Based on the evaluation metrics, **Logistic Regression with SMOTE** was selected
 
 ---
 
+## 🚀 How to Run the Project
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Tanishq200307/mini-project-2
+   ```
 
 
 ## 👤 Authors
