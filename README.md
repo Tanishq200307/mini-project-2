@@ -121,25 +121,39 @@ The following models were evaluated:
 
 ## 🏆 Model Comparison Summary
 
+The table below compares all trained models using **Precision, Recall, F1-score, and ROC-AUC**.  
+Given the class imbalance in the dataset, **F1-score and ROC-AUC** were prioritized for model evaluation.
+
 | Model | Precision | Recall | F1 | ROC-AUC |
 |------|----------|--------|----|--------|
 | **Logistic Regression + SMOTE** | **0.86** | **0.96** | **0.91** | 0.87 |
-| Tuned Logistic Regression + SMOTE | 0.84 | 0.99 | 0.91 | **0.87** |
+| Tuned Logistic Regression + SMOTE (GridSearchCV) | 0.84 | **0.99** | 0.91 | **0.87** |
 | Random Forest + SMOTE | 0.84 | 0.98 | 0.90 | 0.80 |
-| Random Forest (balanced) | 0.84 | 0.98 | 0.90 | 0.79 |
-| Logistic Regression (balanced) | 0.86 | 0.93 | 0.89 | 0.86 |
+| Random Forest (class_weight=balanced) | 0.84 | 0.98 | 0.90 | 0.79 |
+| SVC (class_weight=balanced) | 0.84 | 0.95 | 0.90 | 0.83 |
+| Logistic Regression (class_weight=balanced) | 0.86 | 0.93 | 0.89 | 0.86 |
+| SVC + SMOTE | 0.84 | 0.95 | 0.89 | 0.85 |
 
 ---
 
-## ✅ Best Model Selection
-**Best model (based on F1-score, tie-breaker ROC-AUC):**
+### 🔍 Key Insights
 
-### 🥇 Logistic Regression + SMOTE
-- **F1-score:** 0.91  
-- **Recall:** 96%  
-- **ROC-AUC:** 0.87  
+- **Logistic Regression + SMOTE** achieved the **best overall F1-score (0.91)**, offering the strongest balance between precision and recall.
+- **Hyperparameter tuning (GridSearchCV)** slightly improved recall (**0.99**) and delivered the **highest ROC-AUC (0.87)**.
+- **Random Forest models** achieved very high recall but showed **lower ROC-AUC**, indicating weaker probability calibration.
+- **Support Vector Classifier (SVC)** performed competitively, with **F1 ≈ 0.90**, but **SMOTE did not significantly improve SVC performance**.
+- Overall, **SMOTE was most effective for linear models**, particularly Logistic Regression, in handling class imbalance.
 
-➡️ This model provides the **best balance between identifying approved loans and minimizing false rejections**, making it suitable for real-world loan screening systems.
+---
+
+### ✅ Final Model Selection
+
+Based on the evaluation metrics, **Logistic Regression with SMOTE** was selected as the final model due to its:
+- Highest F1-score
+- Strong ROC-AUC
+- Simplicity and interpretability
+- Robust performance on imbalanced data
+
 
 ---
 
